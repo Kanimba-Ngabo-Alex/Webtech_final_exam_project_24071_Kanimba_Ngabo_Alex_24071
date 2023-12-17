@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Plantation Manager</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<div class="top-links">
+    <a href="/logout">LogOut</a>
+</div>
+<th:block th:include="nav-bar2"></th:block>
+<h2>List of Plantations</h2>
+<form th:action="@{/p}" method="get">
+    <label for="searchTerm">Search:</label>
+    <input type="text" id="searchTerm" name="searchTerm" th:value="${searchTerm}" />
+    <button type="submit">Search</button>
+</form>
+<button type="button" onclick="showNewPlantationForm()">Add a new Plantation</button>
+<table>
+    <thead>
+    <tr>
+        <th><a th:href="@{'/AlistPlantations/' + ${currentPage} + '?sortField=location&sortDir=' + ${reverseSortDir}}">Location</a></th>
+        <th><a th:href="@{'/AlistPlantations/' + ${currentPage} + '?sortField=ownerId&sortDir=' + ${reverseSortDir}}">Owner</a></th>
+        <th><a th:href="@{'/AlistPlantations/' + ${currentPage} + '?sortField=cropId&sortDir=' + ${reverseSortDir}}">Grown Crop</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="plantation: ${Plantations}">
+        <td th:text="${plantation.location}"></td>
+        <td th:text="${plantation.ownerId}"></td>
+        <td th:text="${plantation.cropId}"></td>
+        <td><a th:href="@{'/updatePlantationsInfo/' + ${plantation.plantationId}}">Update</a></td>
+        <td>
+            <form th:action="@{'/deletePlantation/' + ${plantation.plantationId}}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${totalPages > 1}">
+    <div>
+        Total Rows:[[${totalItems}]]
+        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a th:if="${currentPage != i}" th:href="@{'/AlistPlantations/' + ${i} + '?sortField=location&sortDir=' + ${reverseSortDir}}">[[${i}]]</a>
+                <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;&nbsp;
+            </span>
+
+        <a th:if="${currentPage < totalPages}" th:href="@{'/AlistPlantations/' + ${currentPage + 1} + '?sortField=location&sortDir=' + ${reverseSortDir}}">Next</a>
+        <span th:unless="${currentPage < totalPages}">Next</span>
+
+        <a th:if="${currentPage < totalPages}" th:href="@{'/AlistPlantations/' + ${totalPages} + '?sortField=location&sortDir=' + ${reverseSortDir}}">Last</a>
+        <span th:unless="${currentPage < totalPages}">Last</span>
+    </div>
+</div>
+<a th:href="@{/downloadCSV}" class="button">Download Full Report</a>
+<div id="newPlantation" style="display: none;">
+    <form action="/plantations/savePlantation" method="post">
+        <h2>Register a new Plantation</h2>
+        <div class="group">
+            <label for="location" class="label">Location:</label>
+            <input id="location" name="location" type="text" class="input" required>
+        </div>
+        <div class="group">
+            <label for="ownerId" class="label">Owner's Id:</label>
+            <input id="ownerId" name="ownerId" type="text" class="input" required>
+        </div>
+        <div class="group">
+            <label for="cropId" class="label">Crop's Id:</label>
+            <input id="cropId" name="cropId" type="text" class="input" required>
+        </div>
+        <div class="group">
+            <input type="submit" class="button" value="Submit">
+        </div>
+    </form>
+</div>
+<script th:inline="javascript">
+    function showNewPlantationForm() {
+        var formDiv = document.getElementById('newPlantation');
+        formDiv.style.display = formDiv.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+</body>
+</html>

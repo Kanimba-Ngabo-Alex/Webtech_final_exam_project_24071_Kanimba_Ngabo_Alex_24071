@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Plantation Manager</title>
+    <link rel="stylesheet" th:href="@{styles.css}" />
+</head>
+<body>
+    <form action="/users/signup" method="post">
+        <h2>SignUp</h2>
+        <div class="group">
+            <label for="email" class="label">Email</label>
+            <input id="email" name="email" type="email" class="input">
+        </div>
+        <div class="group">
+            <label for="password" class="label">Enter your Password</label>
+            <input id="password" name="password" type="password" class="input" data-type="password">
+        </div>
+        <input id="role" name="role" type="text" class="input" data-type="role" style="display: none;" value="user">
+        <div class="group">
+            <input type="submit" class="button" value="Sign Up">
+        </div>
+        <div class="hr"></div>
+        <div class="foot-lnk">
+            <a href="/login">Already have an account? Login instead</a>
+        </div>
+    </form>
+</body>
+</html>

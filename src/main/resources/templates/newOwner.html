@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantation Manager</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<form action="/owners/AInfo" method="post" enctype="multipart/form-data">
+    <h2>Owner SignUp</h2>
+    <div class="group">
+        <label for="fullNames" class="label">Full Names</label>
+        <input id="fullNames" name="fullNames" type="text" class="input" required>
+    </div>
+    <div class="group">
+        <label for="profilePicture" class="label">Profile Picture</label>
+        <input id="profilePicture" name="profilePicture" type="file" class="input" accept="image/*" required>
+    </div>
+    <div class="group">
+        <input type="submit" class="button" value="Submit">
+    </div>
+</form>
+</body>
+</html>

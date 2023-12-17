@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Plantation Manager</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<div class="top-links">
+    <a href="/logout">LogOut</a>
+</div>
+<th:block th:include="nav-bar"></th:block>
+<h2>My Requests</h2>
+<button type="button" onclick="showNewRequestForm()">Make a new Request</button>
+<table>
+    <thead>
+    <tr>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="request : ${requests}">
+        <td th:text="${request.category}"></td>
+        <td th:text="${request.Description}"></td>
+        <td th:text="${request.status}"></td>
+    </tr>
+    </tbody>
+</table>
+<div id="newRequest" style="display: none;">
+    <form action="/requests/saveRequest" method="post">
+        <h2>Make a new Request</h2>
+        <div class="group">
+            <label for="category" class="label">Category</label>
+            <select id="category" name="category" class="input" required>
+                <option value="feedback">Feed Back </option>
+                <option value="account">Account</option>
+                <option value="plantation">Plantation</option>
+                <option value="crop">Crop</option>
+            </select>
+        </div>
+        <div class="group">
+            <label for="Description" class="label">Description</label>
+            <input id="Description" name="Description" type="text" class="input" required>
+        </div>
+        <input id="status" name="status" type="text" class="input" data-type="role" style="display: none;" value="Pending">
+        <div class="group">
+            <input type="submit" class="button" value="Submit">
+        </div>
+    </form>
+</div>
+<script th:inline="javascript">
+    function showNewRequestForm() {
+        var formDiv = document.getElementById('newRequest');
+        formDiv.style.display = formDiv.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+</body>
+</html>

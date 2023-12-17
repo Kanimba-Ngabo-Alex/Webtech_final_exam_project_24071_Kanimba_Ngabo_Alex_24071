@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Plantation Manager</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<div class="top-links">
+    <a href="/logout">LogOut</a>
+</div>
+<th:block th:include="nav-bar"></th:block>
+<h2>My Crops</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Growth Location</th>
+        <th>Crop Grown</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="plantation : ${plantationz}">
+        <td th:text="${plantation.location}"></td>
+        <td th:text="${plantation.cropId}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

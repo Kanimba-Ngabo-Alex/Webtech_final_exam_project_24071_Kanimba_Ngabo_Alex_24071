@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantation Manager</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<h2>Decision</h2>
+<form th:object="${request}" th:action="@{/saveUpdateRequest}" method="post">
+    <input type="hidden" th:field="*{requestId}" />
+    <label for="status" class="label">Status</label>
+    <select id="status" name="status" class="input" required>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+    </select>
+    <button type="submit">Update status</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Plantation Manager</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<div class="top-links">
+    <a href="/logout">LogOut</a>
+</div>
+<th:block th:include="nav-bar"></th:block>
+
+<h1>Welcome Back <span th:text="${ownerName}"></span></h1>
+</body>
+</html>

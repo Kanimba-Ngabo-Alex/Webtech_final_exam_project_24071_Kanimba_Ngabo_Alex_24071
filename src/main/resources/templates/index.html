@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Plantation Manager</title>
+    <link rel="stylesheet" th:href="@{styles.css}" />
+</head>
+<body>
+<div class="content1">
+    <div class="top-links">
+        <a href="/signUp">SignUp</a>
+        <span class="divider">/</span>
+        <a href="/login">Login</a>
+    </div>
+    <div class="text-center">
+        <img th:src="@{pngwing.com.png}" class="logo" alt="">
+    </div>
+    <h1 data-value="WELCOME">WELCOME</h1>
+</div>
+
+<script>
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        document.querySelector("h1").onmouseover = event => {
+            let i = 0;
+
+            const interval = setInterval(() => {
+                event.target.innerText = event.target.innerText.split("")
+                    .map((letter, index) => {
+                        if (index < i) {
+                            return event.target.dataset.value[index];
+                        }
+                        return alphabet[Math.floor(Math.random() * 26)]
+                    })
+                    .join("");
+                if (i >= event.target.dataset.value.length) {
+                    clearInterval(interval);
+                }
+                i += 1 / 4;
+            }, 30);
+        }
+    </script>
+</body>
+</html>

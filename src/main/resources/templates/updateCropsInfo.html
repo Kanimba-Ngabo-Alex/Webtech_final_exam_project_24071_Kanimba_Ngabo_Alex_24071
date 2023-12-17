@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantation Manager</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+<h2>Update Crop</h2>
+<form th:object="${crop}" th:action="@{/saveUpdateCrop}" method="post">
+    <input type="hidden" th:field="*{cropId}" />
+    <label for="cropName">Crop Name:</label>
+    <input id="cropName" name="cropName" type="text" class="input"th:field="*{cropName}" required>
+
+    <button type="submit">Update Crop</button>
+</form>
+</body>
+</html>
